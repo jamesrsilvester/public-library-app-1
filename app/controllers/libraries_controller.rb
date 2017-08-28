@@ -5,4 +5,17 @@ class LibrariesController < ApplicationController
   def new
     @library = Library.new
   end
+  def create
+    @Library = Library.create(library_params)
+    redirect_to libraries_path
+  end
+  def show
+    @library = Library.find_by_id(params[:id])
+  end
+
+  private
+
+  def library_params
+     params.require(:library).permit(:name, :floor_count, :floor_area)
+  end
 end
